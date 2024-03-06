@@ -8,6 +8,7 @@ import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Utilitarios;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -90,7 +91,7 @@ public class FrmCliente extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtcpf = new javax.swing.JFormattedTextField();
         txtrg = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBusca = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         txtpesquisa = new javax.swing.JTextField();
@@ -251,11 +252,11 @@ public class FrmCliente extends javax.swing.JFrame {
 
         txtrg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBusca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBusca.setText("Pesquisar");
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscaActionPerformed(evt);
             }
         });
 
@@ -290,7 +291,7 @@ public class FrmCliente extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtfixo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(painel_dadosLayout.createSequentialGroup()
-                                                .addComponent(jButton1)
+                                                .addComponent(btnBusca)
                                                 .addGap(0, 0, Short.MAX_VALUE))))
                                     .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(painel_dadosLayout.createSequentialGroup()
@@ -351,7 +352,7 @@ public class FrmCliente extends javax.swing.JFrame {
                         .addGroup(painel_dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                            .addComponent(btnBusca))
                         .addGap(18, 18, 18)
                         .addGroup(painel_dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -592,9 +593,9 @@ public class FrmCliente extends javax.swing.JFrame {
         obj.setId(Integer.parseInt(txtcodigo.getText()));
 
         ClientesDAO dao = new ClientesDAO();
-        
+
         dao.alterarCliente(obj);
-        
+
         new Utilitarios().limpaTela(painel_dados);
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -607,7 +608,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
         ClientesDAO dao = new ClientesDAO();
         dao.excluirCliente(obj);
-        
+
         new Utilitarios().limpaTela(painel_dados);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -710,9 +711,44 @@ public class FrmCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        // Botão Buscar cliente por nome
+        
+        
+            
+            String nome = txtnome.getText();
+            Clientes obj = new Clientes();
+            ClientesDAO dao = new ClientesDAO();
+
+            obj = dao.consultaPorNome(nome);
+            
+            if(obj.getNome() != null) {
+
+            // Exibir os dados de obj nos campos de texto
+            txtcodigo.setText(String.valueOf(obj.getId()));
+            txtnome.setText(obj.getNome());
+            txtrg.setText(obj.getRg());
+            txtcpf.setText(obj.getCpf());
+            txtemail.setText(obj.getEmail());
+            txtfixo.setText(obj.getTelefone());
+            txtcel.setText(obj.getCelular());
+            txtcep.setText(obj.getCep());
+            txtend.setText(obj.getEndereco());
+            txtnumero.setText(String.valueOf(obj.getNumero()));
+            txtcomplemento.setText(obj.getComplemento());
+            txtbairro.setText(obj.getBairro());
+            txtcidade.setText(obj.getCidade());
+            txtcidade.setText(obj.getCidade());
+            cbuf.setSelectedItem(obj.getUf());
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            }
+  
+
+
+
+    }//GEN-LAST:event_btnBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -750,13 +786,13 @@ public class FrmCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBusca;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnpesquisar;
     private javax.swing.JButton btnsalvar;
     private javax.swing.JComboBox<String> cbuf;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
