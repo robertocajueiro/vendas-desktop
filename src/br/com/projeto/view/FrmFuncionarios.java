@@ -5,7 +5,9 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClientesDAO;
+import br.com.projeto.dao.FuncionariosDAO;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.Utilitarios;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -502,12 +504,15 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
         // botão salvar
 
-        Clientes obj = new Clientes();
+        Funcionarios obj = new Funcionarios();
 
         obj.setNome(txtnome.getText());
         obj.setRg(txtrg.getText());
-        obj.setEmail(txtemail.getText());
         obj.setCpf(txtcpf.getText());
+        obj.setEmail(txtemail.getText());
+        obj.setSenha(txtsenha.getText());
+        obj.setCargo(txtcargo.getText());
+        obj.setNivel_acesso(cbnivel.getSelectedItem().toString());
         obj.setTelefone(txtfixo.getText());
         obj.setCelular(txtcel.getText());
         obj.setCep(txtcep.getText());
@@ -518,8 +523,8 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         obj.setCidade(txtcidade.getText());
         obj.setUf(cbuf.getSelectedItem().toString());
 
-        ClientesDAO dao = new ClientesDAO();
-        dao.cadastrarCliente(obj);
+        FuncionariosDAO dao = new FuncionariosDAO();
+        dao.cadastrarFuncionarios(obj);
 
         new Utilitarios().limpaTela(painel_dados);
     }//GEN-LAST:event_btnsalvarActionPerformed
