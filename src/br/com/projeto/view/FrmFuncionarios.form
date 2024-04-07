@@ -754,8 +754,8 @@
                         <Column editable="true" title="CPF" type="java.lang.Object"/>
                         <Column editable="true" title="E-mail" type="java.lang.Object"/>
                         <Column editable="true" title="Senha" type="java.lang.Object"/>
-                        <Column editable="true" title="N&#xed;vel acesso" type="java.lang.Object"/>
                         <Column editable="true" title="Cargo" type="java.lang.Object"/>
+                        <Column editable="true" title="N&#xed;vel acesso" type="java.lang.Object"/>
                         <Column editable="true" title="Telefone" type="java.lang.Object"/>
                         <Column editable="true" title="Celular" type="java.lang.Object"/>
                         <Column editable="true" title="Cep" type="java.lang.Object"/>
