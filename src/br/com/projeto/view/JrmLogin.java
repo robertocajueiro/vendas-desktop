@@ -4,6 +4,9 @@
  */
 package br.com.projeto.view;
 
+import br.com.projeto.dao.FuncionariosDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Roberto Dantas
@@ -35,7 +38,7 @@ public class JrmLogin extends javax.swing.JFrame {
         btnentrar = new javax.swing.JButton();
         btnsair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bem vindo ao sistema- Autenticação");
 
         jPanel1.setBackground(new java.awt.Color(0, 167, 79));
@@ -76,12 +79,22 @@ public class JrmLogin extends javax.swing.JFrame {
                 txtsenhaActionPerformed(evt);
             }
         });
+        txtsenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtsenhaKeyPressed(evt);
+            }
+        });
 
         btnentrar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnentrar.setText("ENTRAR");
         btnentrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnentrarActionPerformed(evt);
+            }
+        });
+        btnentrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnentrarKeyPressed(evt);
             }
         });
 
@@ -144,8 +157,32 @@ public class JrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsenhaActionPerformed
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
-        // TODO add your handling code here:
+        // Botao de entrar
+        try {
+            String email, senha;
+            email = txtemail.getText();
+            senha = txtsenha.getText();
+            
+            FuncionariosDAO dao = new FuncionariosDAO();
+            
+            dao.efetuaLogin(email, senha);  
+            
+            // esconder a tela de login após efetuado com sucesso
+            this.dispose();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro");
+            
+        }
     }//GEN-LAST:event_btnentrarActionPerformed
+
+    private void btnentrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnentrarKeyPressed
+
+    }//GEN-LAST:event_btnentrarKeyPressed
+
+    private void txtsenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsenhaKeyPressed
 
     /**
      * @param args the command line arguments
