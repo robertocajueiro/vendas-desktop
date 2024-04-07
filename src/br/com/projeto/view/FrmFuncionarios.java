@@ -366,6 +366,11 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 btnpesquisarActionPerformed(evt);
             }
         });
+        btnpesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnpesquisarKeyPressed(evt);
+            }
+        });
 
         tabelaFuncionarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tabelaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -625,27 +630,30 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         String nome = "%" + txtpesquisa.getText() + "%";
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscaClientePorNome(nome);
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.buscaFuncionariosPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) tabelaFuncionarios.getModel();
         dados.setNumRows(0);
 
-        for (Clientes c : lista) {
+        for (Funcionarios f : lista) {
             dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivel_acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
             });
 
         }
@@ -656,38 +664,41 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         String nome = "%" + txtpesquisa.getText() + "%";
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscaClientePorNome(nome);
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.buscaFuncionariosPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) tabelaFuncionarios.getModel();
         dados.setNumRows(0);
 
-        for (Clientes c : lista) {
+        for (Funcionarios f : lista) {
             dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                 f.getSenha(),
+                f.getCargo(),
+                f.getNivel_acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
             });
 
         }
     }//GEN-LAST:event_txtpesquisaKeyPressed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
-        // Botão Buscar cliente por nome
+        // Botão Buscar funcionario por nome
 
         String nome = txtnome.getText();
-        Clientes obj = new Clientes();
-        ClientesDAO dao = new ClientesDAO();
+        Funcionarios obj = new Funcionarios();
+        FuncionariosDAO dao = new FuncionariosDAO();
 
         obj = dao.consultaPorNome(nome);
 
@@ -699,6 +710,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             txtrg.setText(obj.getRg());
             txtcpf.setText(obj.getCpf());
             txtemail.setText(obj.getEmail());
+            txtsenha.setText(obj.getSenha());
+            txtcargo.setText(obj.getCargo());
+            cbnivel.setSelectedItem(obj.getNivel_acesso());
             txtfixo.setText(obj.getTelefone());
             txtcel.setText(obj.getCelular());
             txtcep.setText(obj.getCep());
@@ -711,7 +725,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             cbuf.setSelectedItem(obj.getUf());
 
         } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            JOptionPane.showMessageDialog(null, "Funcionario não encontrado!");
         }
 
 
@@ -729,7 +743,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             txtbairro.setText(obj.getBairro());
             txtcidade.setText(obj.getCidade());
             cbuf.setSelectedItem(obj.getUf());
-    
 
         }
     }//GEN-LAST:event_txtcepKeyPressed
@@ -749,6 +762,40 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private void tabelaFuncionariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFuncionariosMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaFuncionariosMousePressed
+
+    private void btnpesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnpesquisarKeyPressed
+        // TODO add your handling code here: // Botão pesquisar
+
+        String nome = "%" + txtpesquisa.getText() + "%";
+
+        FuncionariosDAO dao = new FuncionariosDAO();
+        List<Funcionarios> lista = dao.buscaFuncionariosPorNome(nome);
+        DefaultTableModel dados = (DefaultTableModel) tabelaFuncionarios.getModel();
+        dados.setNumRows(0);
+
+        for (Funcionarios f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivel_acesso(),
+                f.getTelefone(),
+                f.getCelular(),
+                f.getCep(),
+                f.getEndereco(),
+                f.getNumero(),
+                f.getComplemento(),
+                f.getBairro(),
+                f.getCidade(),
+                f.getUf()
+            });
+
+        }
+    }//GEN-LAST:event_btnpesquisarKeyPressed
 
     /**
      * @param args the command line arguments
