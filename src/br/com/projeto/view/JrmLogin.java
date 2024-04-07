@@ -36,7 +36,7 @@ public class JrmLogin extends javax.swing.JFrame {
         btnsair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bem vindo - Autenticação de usuários");
+        setTitle("Bem vindo ao sistema- Autenticação");
 
         jPanel1.setBackground(new java.awt.Color(0, 167, 79));
         jPanel1.setToolTipText("");
@@ -136,6 +136,7 @@ public class JrmLogin extends javax.swing.JFrame {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnentrar, btnsair});
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
